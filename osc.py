@@ -16,6 +16,8 @@ class Osc:
         self.theta_1 = np.zeros(N)
         self.theta_2 = np.zeros(N)
         self.theta_cos = np.zeros(N)
+        self.dt1 = 0.001
+        self.dt2 = 0.5 * self.dt1
 
     def aperiod(self):
         """ Approximate series solution for the period of the oscillation
@@ -59,12 +61,12 @@ class Osc:
         fac = 180.0 / pi
         for i in range(0, N):
             self.theta_1[i] = fac * th
-            (th, thd) = self.verlet(th, thd, 0.001, delt)
+            (th, thd) = self.verlet(th, thd, self.dt1, delt)
         th = self.angle
         thd = 0.0
         for i in range(0, N):
             self.theta_2[i] = fac * th
-            (th, thd) = self.verlet(th, thd, 0.0005, delt)
+            (th, thd) = self.verlet(th, thd, self.dt2, delt)
 
     def verlet(self, theta, thetad, dt, delt):
         """integrates the motion between 2 adjacent points on the graph
@@ -99,5 +101,5 @@ class Osc:
         input('\npress enter to continue and view a graph of how the '
               'pendulum\'s\nangle varies with time\n')
         fig = plt.gcf()
-        fig.canvas.set_window_title('time graph')
+        fig.canvas.set_window_title('time graph, close to end program')
         plt.show()

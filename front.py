@@ -29,11 +29,13 @@ class FrontEnd:
     def intro(self):
         print('This program computes and plots the motion of '
               'a simple pendulum.')
-        print('This is done firstly using the simple harmonic motion '
-              'approximation\nand secondly it is done numerically\n')
+        print('This is done firstly using an assumed sinusoidal motion\n'
+              'with a 12th order expansion for the period\n'
+              'and secondly it is done numerically for a two different '
+              'time step values\n')
         print('In the limit where both the numerical time step size'
-              '\nand the oscillation amplitude are large')
-        print('the results should coincide for both methods.\n\n\n')
+              '\nand the oscillation amplitude are small')
+        print('the results should coincide for all three calculations.\n\n\n')
 
     """ this method collects all of the data from the user """
     def my_input(self):
@@ -84,7 +86,7 @@ class FrontEnd:
         plt.plot(x, y)
         plt.xlabel('x')
         plt.ylabel('y')
-        plt.title('Initial (stationary) pendulum position')
+        plt.title('Initial (stationary) pendulum position.')
         plt.grid(True)
         plt.gca().set_aspect('equal', adjustable='box')
         input('\npress enter to continue and view a graph of how the '
@@ -94,5 +96,5 @@ class FrontEnd:
         ax = fig.gca()
         circle = plt.Circle((self.init_x, self.init_y), rad, color='blue')
         ax.add_artist(circle)
-        fig.canvas.set_window_title('initial graph')
+        fig.canvas.set_window_title('initial graph, close graph to continue')
         plt.show()
